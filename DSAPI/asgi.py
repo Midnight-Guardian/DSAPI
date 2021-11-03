@@ -1,5 +1,5 @@
 """
-ASGI config for DSAPI project.
+ASGI DSAPI for DSAPI project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

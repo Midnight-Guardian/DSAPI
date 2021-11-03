@@ -1,5 +1,5 @@
 """
-WSGI config for DSAPI project.
+WSGI DSAPI for DSAPI project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
