@@ -2,6 +2,7 @@ from rest_framework import serializers
 from backendapps.hotel.models import HotelFields, HotelRoom, RatingRooms, BookingRoom
 
 class HotelFieldsSerializer(serializers.ModelSerializer):
+    """Hotel fields serializer"""
 
     class Meta:
         model = HotelFields
@@ -12,6 +13,7 @@ class HotelFieldsSerializer(serializers.ModelSerializer):
         )
 
 class RatingsRoomsSerializer(serializers.ModelSerializer):
+    """Ratings Rooms Serializer"""
 
     class Meta:
         model = RatingRooms
@@ -21,6 +23,8 @@ class RatingsRoomsSerializer(serializers.ModelSerializer):
         )
 
 class HotelRoomsSerializer(serializers.ModelSerializer):
+    """Hotel Rooms Serializer"""
+
     about_room = HotelFieldsSerializer(many=True)
     services = RatingsRoomsSerializer(many=True)
     image = serializers.ImageField(use_url=True)
@@ -36,6 +40,7 @@ class HotelRoomsSerializer(serializers.ModelSerializer):
         )
 
 class BookingHotelSerializer(serializers.ModelSerializer):
+    """Booking Hotel Room Serializer"""
 
     class Meta:
         model = HotelRoom
@@ -43,7 +48,9 @@ class BookingHotelSerializer(serializers.ModelSerializer):
 
 
 class BookingRoomListSerializer(serializers.ModelSerializer):
+    """Booking Rooms List Serializer"""
     rooms = BookingHotelSerializer(read_only=True)
+
     class Meta:
         model = BookingRoom
         fields = (
@@ -60,6 +67,8 @@ class BookingRoomListSerializer(serializers.ModelSerializer):
 
 
 class BookingRoomSerializer(serializers.ModelSerializer):
+    """Booking Room Serializer"""
+
     class Meta:
         model = BookingRoom
         fields = (
@@ -76,6 +85,7 @@ class BookingRoomSerializer(serializers.ModelSerializer):
 
     # Требуется в случае CreateApiView
     def create(self, request):
+        """Record creation in database"""
         print(request)
         results = request.pop('rooms')
         booking = BookingRoom.objects.create(rooms=results, **request)

@@ -3,7 +3,9 @@ from django.db import models
 
 # Create your models here.
 
+
 class HotelRoom(models.Model):
+    """Hotel Rooms model"""
     title = models.CharField("Название", max_length=50)
     desc = models.CharField("Описание", max_length=500)
     image = models.ImageField("Фото", upload_to="room/", null=True, blank=True)
@@ -15,7 +17,9 @@ class HotelRoom(models.Model):
     def __str__(self):
         return self.title
 
+
 class HotelFields(models.Model):
+    """Hotel Fields Model"""
     title = models.CharField("Название", max_length=50)
     desc = models.CharField("Описание", max_length=500)
     icon = models.CharField("Иконка", max_length=500)
@@ -25,6 +29,7 @@ class HotelFields(models.Model):
         on_delete=models.CASCADE,
         related_name="about_room",
     )
+
     class Meta:
         verbose_name = "Поле номеров"
         verbose_name_plural = "Поля номеров"
@@ -32,7 +37,9 @@ class HotelFields(models.Model):
     def __str__(self):
         return self.title
 
+
 class RatingRooms(models.Model):
+    """Rating Rooms Model"""
     title = models.CharField("Название", max_length=50)
     rating = models.FloatField("Оценка", validators=[MinValueValidator(0), MaxValueValidator(10)])
     services = models.ForeignKey(
@@ -49,7 +56,9 @@ class RatingRooms(models.Model):
     def __str__(self):
         return self.title
 
+
 class BookingRoom(models.Model):
+    """Booking Room Model"""
     entry_date = models.CharField("Дата заезда", max_length=50)
     depart_date = models.CharField("Дата выезда", max_length=50)
     name = models.CharField("Имя", max_length=50)
@@ -63,6 +72,7 @@ class BookingRoom(models.Model):
         verbose_name="Заказанный номер",
         on_delete=models.CASCADE,
     )
+
     class Meta:
         verbose_name = "Забронированный норме"
         verbose_name_plural = "Забронированные номера"
